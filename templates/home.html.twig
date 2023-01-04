@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class='d-flex justify-content-center row-cols-1 row-cols-md-1 g-4'>
+
+<div class="row row-cols-3 g-4">
+  <div class="col">
+{% for annonce in tableau %}
+    
+    <div class="card">
+      <img src="https://mdbcdn.b-cdn.net/img/new/standard/city/041.webp" class="card-img-top" alt="Hollywood Sign on The Hill">
+      <div class="card-body">
+        <h5 class="card-title">{{annonce.title}}</h5>
+        <p class="card-text">
+          {{ annonce.description }}
+        </p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    
+  {% endfor %}
+  
+</div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
