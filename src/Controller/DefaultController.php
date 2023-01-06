@@ -5,8 +5,9 @@ namespace App\Controller;
 use DateTime;
 
 use App\Entity\Annonce;
+use App\Entity\User;
 use App\Form\AnnonceFormType;
-
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -54,6 +55,7 @@ class DefaultController extends AbstractController
         if($form->isSubmitted() && $form->isValid()){
             $data =$form->getData();
             // $data = $annonce->setCreatedAt(new DateTime());
+           // $data = $annonce->setAnnonceByUser($this->getUser());
             $entityManager->persist($data);
             $entityManager->flush();
 
@@ -69,16 +71,54 @@ class DefaultController extends AbstractController
             'formAnnonce' => $form
         ]);
      }
+
+
+     #[Route('/edit/annonce/{id}', name: 'edit_annonce')]
+     public function editAnnonce(int $id, EntityManagerInterface $em, Request $request)
+    {
+        $annonce = $em->getRepository(Annonce::class)->find($id);
+
+        $form = $this->createForm(AnnonceFormType::class, $annonce);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()){
+            $data = $form->getData();
+            //$data = $annonce->setUpdatedAt(new DateTime());
+            $em->persist($data);
+            $em->flush();
+            
+            return $this->redirectToRoute('app_annonce',[
+                "id" => $id
+        ]);
+        }
+
+        return $this->render('add.html.twig', [
+            'formAnnonce' => $form,
+            //'createdAt' => $annonce->getCreatedAt()
+        ]);
+    }
      
+    #[Route('/delete/annonce/{id}', name: 'delete_annonce')]
+     public function deleteAnnonce(int $id, EntityManagerInterface $em, Request $request)
+    {
+        $annonce = $em->getRepository(Annonce::class)->find($id);
+        $em->remove($annonce);
+        $em->flush();
+            
+        return $this->redirectToRoute('home');
+    }
+
      #[Route('annonce/{id}', name: 'app_annonce')]
 
     public function annonce(ManagerRegistry $doctrine, int $id): Response
     {
 
         $repository = $doctrine->getRepository(Annonce::class);
+
         $annonce = $repository->find($id);
         
-
+        
         return $this->render('annonce.html.twig',[
             'annonce' => $annonce,
         ]);

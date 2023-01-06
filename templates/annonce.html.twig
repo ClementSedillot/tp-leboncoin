@@ -17,7 +17,12 @@
                     <h3 class="card-subtitle">{{ annonce.description }}</h3>
                     <p class="card-subtitle">{{ annonce.price }} €</p>
                     <p class="card-subtitle">{{ annonce.categorie.title }}</p>
+                    <p class="card-subtitle">Par : {{ annonce.user.email }}</p>
                     <a href="/" class="btn btn-primary">retour</a>
+                     {% if annonce.user.id == app.user.id %}
+                                <a href="{{ path('edit_annonce', { id: annonce.id }) }}" class="btn btn-success">Modifier</a>
+                                <a href="{{ path('delete_annonce', { id: annonce.id }) }}"  class="btn btn-danger">Supprimer</a>
+                    {% endif %} 
                 </div>
             </div>
         </div>
