@@ -28,6 +28,10 @@ class Annonce
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updated_at = null;
 
+    #[ORM\ManyToOne(inversedBy: 'annonce')]
+    private ?Categorie $categorie = null;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -92,4 +96,17 @@ class Annonce
 
         return $this;
     }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
+    }
+
 }

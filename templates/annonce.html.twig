@@ -1,2 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block body %}
+
+
+
+
+
+
+
+  <div class="container ">
+            <h1>{{ annonce.title }}</h1>
+            <div class="card" style="width: 60rem d-flex justify-content-center">
+                <img src="https://www.lesrhabilleurs.com/wp-content/uploads/2021/10/hermes-h08-15-1920x980.jpg" class="card-img-top" alt="Accroche HTML">
+                <div class="card-body">
+                    <h2 class="card-title"></h2>
+                    <h3 class="card-subtitle">{{ annonce.description }}</h3>
+                    <p class="card-subtitle">{{ annonce.price }} €</p>
+                    <p class="card-subtitle">{{ annonce.categorie.title }}</p>
+                    <a href="/" class="btn btn-primary">retour</a>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}

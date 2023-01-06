@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use DateTime;
+
 use App\Entity\Annonce;
 use App\Form\AnnonceFormType;
-use App\Form\AnnonceType;
+
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,6 +21,15 @@ class DefaultController extends AbstractController
     {
         $annonce = $doctrine->getRepository(Annonce::class)->findAll();
         return $this->render('home.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+//trad anglais
+    #[Route('/home_en', name: 'home_page_en')]
+    public function homeEn(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('home_en.html.twig',[
             'tableau' => $annonce
     ]);
     }
@@ -42,6 +53,7 @@ class DefaultController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $data =$form->getData();
+            // $data = $annonce->setCreatedAt(new DateTime());
             $entityManager->persist($data);
             $entityManager->flush();
 
@@ -58,6 +70,18 @@ class DefaultController extends AbstractController
         ]);
      }
      
-     
+     #[Route('annonce/{id}', name: 'app_annonce')]
+
+    public function annonce(ManagerRegistry $doctrine, int $id): Response
+    {
+
+        $repository = $doctrine->getRepository(Annonce::class);
+        $annonce = $repository->find($id);
+        
+
+        return $this->render('annonce.html.twig',[
+            'annonce' => $annonce,
+        ]);
+    }
 
 }

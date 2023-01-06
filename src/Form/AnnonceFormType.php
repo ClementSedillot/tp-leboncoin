@@ -53,9 +53,9 @@ class AnnonceFormType extends AbstractType
             'attr' => ['placeholder' => 'Prix'],
         ])
         
-        // ->add('categorie', EntityType::class, [
-        //     'class' => Categorie::class,
-        //     'choice_label' => 'title'])
+        ->add('categorie', EntityType::class, [
+            'class' => Categorie::class,
+            'choice_label' => 'title'])
        
         ->add('submit', SubmitType::class,[
             'attr' => ['class' => 'btn btn-success '],

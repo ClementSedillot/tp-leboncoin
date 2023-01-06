@@ -10,14 +10,20 @@
 
     <title>{% block title %}Le coin de Clément{% endblock %}</title>
     <style>
+    *{
+      padding:0;
+      margin:0;
+    }
       body{
         padding-bottom: 5em;
+        padding-top: 5em;
       }
+
     </style>
   </head>
   <header>
   {% block navbar %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark d-flex fixed-top">
       <div class="mr-auto p-2">
         <a href="/home" class="text-decoration-none text-light navbar-brand">Le Coin de Clément</a>
         <a href="/add" class="text-decoration-none text-secondary navbar-brand nav-link">Déposer une annonce</a>
@@ -31,8 +37,9 @@
         <a href="#" class="text-decoration-none text-secondary navbar-brand nav-link">Bonjour {{app.user.email}}</a>
         <a href="{{ path('app_logout') }}" type="button" class="btn btn-danger">Logout</a>
         {% endif %}
+        <a href="/home_en" class="text-decoration-none btn text-secondary navbar-brand nav-link">English</a>
+        <a href="/home" class="text-decoration-none btn text-secondary navbar-brand nav-link">Français</a>
       </div>
-     
     </nav>
   {% endblock %}
   </header>
@@ -43,7 +50,7 @@
   <footer>
   {% block footer %} 
   <div class="bg-dark text-light card-footer fixed-bottom d-flex justify-content-center">
-    <h3>Copyrgiht @Clément_Seidllot</h3>
+    <h3>Copyright @Clément_Seidllot</h3>
   </div>
   {% endblock %}
   </footer>
