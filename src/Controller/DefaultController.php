@@ -9,6 +9,7 @@ use App\Entity\User;
 use App\Form\AnnonceFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -82,6 +83,10 @@ class DefaultController extends AbstractController
 
         $form->handleRequest($request);
 
+        if($annonce->getUser()->getId() != $this->getUser()->getId()){
+            throw new Exception('Vous n`avez pas accès a cette annonce');
+        }
+
         if ($form->isSubmitted() && $form->isValid()){
             $data = $form->getData();
             //$data = $annonce->setUpdatedAt(new DateTime());
@@ -103,6 +108,13 @@ class DefaultController extends AbstractController
      public function deleteAnnonce(int $id, EntityManagerInterface $em, Request $request)
     {
         $annonce = $em->getRepository(Annonce::class)->find($id);
+
+        
+        if($annonce->getUser()->getId() != $this->getUser()->getId()){
+            throw new Exception('Vous n`avez pas accès a cette annonce');
+        }
+
+        
         $em->remove($annonce);
         $em->flush();
             
