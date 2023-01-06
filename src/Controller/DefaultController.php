@@ -55,8 +55,8 @@ class DefaultController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()){
             $data =$form->getData();
-            // $data = $annonce->setCreatedAt(new DateTime());
-           // $data = $annonce->setAnnonceByUser($this->getUser());
+            //$data = $annonce->setCreatedAt();
+            $data = $annonce->setUser($this->getUser());
             $entityManager->persist($data);
             $entityManager->flush();
 
