@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+
+<div class='d-flex justify-content-center row-cols-md-1 g-4'>
+  <div class="container">
+    <div class="card-columns">
+     {% for annonce in tableau %}
+    
+      <div class="card">
+        <img src="https://www.ouiouitex.com/media/catalog/category/sp_cial_noel.png" class="card-img-top" alt="Hollywood Sign on The Hill">
+        <div class="card-body">
+            <h5 class="card-title">{{annonce.title}}</h5>
+            <p class="card-text">
+              {{ annonce.description }}
+            </p>
+            <p>
+              {{ annonce.price }}
+            </p>
+            <a href="{{path ('app_annonce', {id : annonce.id}) }}" class="btn btn-primary">Lire</a>
+        </div>
+          <div class="card-footer row">
+            <small class="text-muted col">Categorie : {{ annonce.categorie.title }}</small>
+            <small class="text-muted col text-right">{{ annonce.getCreatedAt()|date("m/d/Y") }}</small>
+          </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
+
