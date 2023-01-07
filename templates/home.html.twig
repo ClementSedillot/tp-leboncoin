@@ -21,7 +21,7 @@
             <a href="{{path ('app_annonce', {id : annonce.id}) }}" class="btn btn-primary">Lire</a>
         </div>
           <div class="card-footer row">
-            <small class="text-muted col">{{ annonce.categorie.title }}</small>
+            <small class="text-muted col">Categorie : {{ annonce.categorie.title }}</small>
             <small class="text-muted col text-right">{{ annonce.getCreatedAt()|date("m/d/Y") }}</small>
           </div>
       </div>
