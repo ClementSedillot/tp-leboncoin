@@ -1,0 +1,25 @@
+<?php 
+
+	ini_set('sendmail_from', "OV-site@gmail.com");
+
+	if(isset($_POST["msg_mail"]) && $_POST["msg_mail"]!="")
+	{
+		$expediteur = $_POST["msg_mail"]; 
+		$destinataire = "clement.sedillot@gmail.com";
+		// $sujet = $_POST["msg_sujet"];
+        // $motif = $_POST["msg_motif"];
+       // $fichier = $_POST['fichier'];
+
+
+		$entete = "Content-Type: text/html;\n";
+		$entete .= "From : ".$expediteur;
+        
+
+		$contenue_message = mb_convert_encoding($_POST["msg_contenu"])."\r\n";
+		$contenue_message = "De : ".$_POST["msg_mail"]."<br /> <br /><strong> Mr/Mme : ".$_POST["msg_nom"]."</strong><br /> <br />".$contenue_message."<br>"; 
+		$contenue_message = "<html><body>".$contenue_message."</body></html>";
+
+		$reussi = mail($destinataire, $contenue_message, $entete);
+	}
+	
+?>

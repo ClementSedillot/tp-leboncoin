@@ -22,8 +22,11 @@ class DefaultController extends AbstractController
     public function home(ManagerRegistry $doctrine): Response
     {
         $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        $loopCount = 0;
+
         return $this->render('home.html.twig',[
-            'tableau' => $annonce
+            'tableau' => $annonce,
+            'loopCount' => $loopCount
     ]);
     }
 //trad anglais
@@ -43,6 +46,58 @@ class DefaultController extends AbstractController
 
      }
 
+//PAGE ACTIVITE
+#[Route('/activite', name: 'activite')]
+    public function activite(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('activite.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+
+//OLIVIER VARENNE
+#[Route('/olivier-varenne', name: 'olivier-varenne')]
+    public function ov(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('ov.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+
+#[Route('/horlogerie', name: 'horlogerie')]
+    public function horlogerie(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('horlogerie.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+
+//PAGE ACTU
+
+#[Route('/actu', name: 'actu')]
+    public function actu(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('actu.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+
+//PAGE CONCTACT
+
+#[Route('/contact', name: 'contact')]
+    public function contact(ManagerRegistry $doctrine): Response
+    {
+        $annonce = $doctrine->getRepository(Annonce::class)->findAll();
+        return $this->render('contact.html.twig',[
+            'tableau' => $annonce
+    ]);
+    }
+
+//ADD ANNONCE
      #[Route('/add', name: 'add')]
      public function add(ManagerRegistry $doctrine, Request $request): Response
      {
@@ -100,6 +155,7 @@ class DefaultController extends AbstractController
 
         return $this->render('add.html.twig', [
             'formAnnonce' => $form,
+            
             //'createdAt' => $annonce->getCreatedAt()
         ]);
     }
@@ -135,5 +191,9 @@ class DefaultController extends AbstractController
             'annonce' => $annonce,
         ]);
     }
+
+    // MAILER
+
+    
 
 }

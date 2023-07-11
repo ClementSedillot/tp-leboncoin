@@ -9,20 +9,20 @@
 
 
   <div class="container ">
-            <h1>{{ annonce.title }}</h1>
-            <div class="card" style="width: 60rem d-flex justify-content-center">
-                <img src="https://www.ouiouitex.com/media/catalog/category/sp_cial_noel.png" class="card-img-top" alt="Accroche HTML">
-                <div class="card-body">
-                    <h2 class="card-title"></h2>
-                    <h3 class="card-subtitle">{{ annonce.description }}</h3>
-                    <p class="card-subtitle">{{ annonce.price }} €</p>
-                    <p class="card-subtitle">{{ annonce.categorie.title }}</p>
-                    <p class="card-subtitle">Par : {{ annonce.user.email }}</p>
-                    <a href="/" class="btn btn-primary">retour</a>
-                     {% if annonce.user.id == app.user.id %}
-                                <a href="{{ path('edit_annonce', { id: annonce.id }) }}" class="btn btn-success">Modifier</a>
-                                <a href="{{ path('delete_annonce', { id: annonce.id }) }}"  class="btn btn-danger">Supprimer</a>
-                    {% endif %} 
+            <h1 class="actu-title">{{ annonce.title }}</h1>
+                    <div class="ov-wrap">
+                        <div class="d-flex  justify-content-center align-items-center box-70 ov-phone">
+                            <div class="actu-img"><img src="{{asset('build/images/olivier.png')}}" class="actu-img" alt=""></div>
+                            <p class="center ov-text">{{ annonce.description }}</p>
+                        </div>
+                    </div>
+                    <a href="/" class="btn-actu">retour</a>
+                    {% if app.user %}
+                        {% if annonce.user.id == app.user.id %}
+                            <a href="{{ path('edit_annonce', { id: annonce.id }) }}" class="btn btn-success">Modifier</a>
+                            <a href="{{ path('delete_annonce', { id: annonce.id }) }}"  class="btn btn-danger">Supprimer</a>
+                        {% endif %}
+                    {% endif %}  
                 </div>
             </div>
         </div>

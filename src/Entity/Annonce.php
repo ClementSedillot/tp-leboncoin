@@ -34,6 +34,9 @@ class Annonce
     #[ORM\ManyToOne(inversedBy: 'annonces')]
     private ?User $user = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $image = null;
+
 
     public function getId(): ?int
     {
@@ -120,6 +123,18 @@ class Annonce
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(string $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

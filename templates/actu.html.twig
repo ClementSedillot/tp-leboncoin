@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+{# <div class='wrapper'>
+    {% for annonce in tableau %}
+      <div class="image-container">
+        <img src="{{asset('build/images/olivier.png')}}" alt="Votre image">
+        <div class="overlay">
+          <h5 class="card-title">{{annonce.title}}</h5>
+          <p class="card-text">
+            {{ annonce.description }}
+          </p>
+          <a href="{{path ('app_annonce', {id : annonce.id}) }}" class="btn btn-primary">Lire</a>
+        </div>
+      </div>
+    {% endfor %}
+</div> #}
+
+<div class="wrapper-actu d-flex w-100">
+  <div class="spar d-flex w-100">
+    <div class="left-screen">
+      <h3 class="actu-title">Mes Activités</h3>
+      
+      {% for annonce in tableau %}
+      {% if annonce.categorie.id == 2 %}
+        <div class="image-container">
+          <img src="{{asset('build/images/{{annonce.image}}')}}" alt="Votre image">
+          <div class="overlay">
+            <h5 class="card-title">{{annonce.title}}</h5>
+            <p class="card-text">
+              {{ annonce.description }}
+            </p>
+            <a href="{{path ('app_annonce', {id : annonce.id}) }}" class="btn btn-primary">Lire</a>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+    </div>
+    <div class="right-screen">
+      <h3 class="actu-title">Mes Réalisations</h3>
+        {% for annonce in tableau %}
+          {% if annonce.categorie.id == 1 %}
+            <div class="image-container">
+              <img src="{{asset('build/images/olivier.png')}}" alt="Votre image">
+              <div class="overlay">
+                <h5 class="card-title">{{annonce.title}}</h5>
+                <p class="card-text">
+                  {{ annonce.description }}
+                </p>
+                <a href="{{path ('app_annonce', {id : annonce.id}) }}" class="btn btn-primary">Lire</a>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

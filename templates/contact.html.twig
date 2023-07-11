@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h3 class="contact-title m-3">Contact</h3>
+
+<form class="contact" action="">
+
+    <div class="name">
+        <input class="contact-input m-2" type="text" id="name" name="name" placeholder="Name" Required>
+        <input class="contact-input m-2" type="text" id="surname" name="surname" placeholder="Surname" Required>
+    </div>
+
+    <div>
+        <input class="contact-input m-2" type="text" id="number" name="number" placeholder="Phone" Required>
+    </div>
+
+    <div>
+        <input class="contact-input m-2" type="email" id="email" name="email" placeholder="Email" Required>
+    </div>
+
+    <div>
+        <input class="contact-input m-2" type="text" id="object" name="object" placeholder="Object" Required>
+    </div>
+
+    <div>
+        <input class="" type="message" id="message" name="message" placeholder="Message" Required>
+    </div>
+
+    <div>
+        <input type="submit" class="contact-button btn-press" value="Envoyer">
+    </div>
+
+</form>
+
+
+
+{% endblock %}
